@@ -8,6 +8,7 @@
 #include<set>
 #include<unordered_set>
 #include<string>
+#include<memory>
 
 #include<cstdlib>
 #include<cstdio>
