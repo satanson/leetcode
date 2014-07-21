@@ -8,6 +8,7 @@ public:
 		set<LIST*> s;
 		for(int i=0;i<num.size();i++){
 			int n=num[i];
+			if (m.count(n))continue;
 			if (!m.count(n-1)&&!m.count(n+1)){
 				m[n]=new LIST();
 			}else if (!m.count(n-1)&&m.count(n+1)){
