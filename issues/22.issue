@@ -1,0 +1,6 @@
+1. unordered_set<pair<int,int>> needs hash function,so use set<pair<int,int>>
+2. BFS traverse,mark visited vertex. 
+two time point to mark vertex:
+(a).mark vertex before pushed the vertex into queue.
+(b).mark vertex after the vertex poped from queue.
+when use (b),more duplicated vertex will pushed into queue,so use a set to determine if the vertex is in queue or not.

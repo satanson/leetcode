@@ -1,0 +1,12 @@
+1.  the element is destroyed when it's removed from container,so code below is WRONG!!!.
+	list<list<int>> partialpaths;
+	list<int>& p=partialpaths.back();
+	partialpaths.pop_back();
+
+solution:
+	list<list<int>> partialpaths;
+	list<int>p;
+	std::swap(partialpaths.back(),p);
+	partialpaths.pop_back();
+
+
