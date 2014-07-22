@@ -7,11 +7,11 @@
  };
 class Solution {
 public:
-    vector<vector<int> > pathSum(TreeNode *root, int sum) {
+    bool hasPathSum(TreeNode *root, int sum) {
 		vector<vector<int>> paths;
 		list<int> path;
 		if(root)preOrder(root,0,sum,path,paths);
-		return paths;
+		return paths.size()>0;
     }
 	void preOrder(TreeNode *branch,int sum,int targetSum,list<int>& path, vector<vector<int>>& paths){
 		sum+=branch->val;
@@ -56,10 +56,6 @@ int main(){
 		n4.right=&n8;
 		n6.left=&n9;
 		n6.right=&n10;
-		vector<vector<int>> paths=so.pathSum(&n1,22);
-		for (int i=0;i<paths.size();i++){
-			for(int j=0;j<paths[i].size();j++)cout<<paths[i][j]<<" ";
-			cout<<endl;
-		}
+		cout<<boolalpha<<so.hasPathSum(&n1,22)<<endl;
 	}
 }
