@@ -20,13 +20,21 @@ public:
 		if (branch->left && branch->right){
 			left_branch_tail->right=branch->right;
 			branch->right=branch->left;
+			branch->left=NULL;
+			right_branch_tail->left=NULL;
+			left_branch_tail->left=NULL;
 			return right_branch_tail;
 		}else if (branch->left && !branch->right){
 			branch->right=branch->left;
+			branch->left=NULL;
+			left_branch_tail->left=NULL;
 			return left_branch_tail;
 		}else if (!branch->left && branch->right){
+			branch->left=NULL;
+			right_branch_tail->left=NULL;
 			return right_branch_tail;
 		}else {
+			branch->left=NULL;
 			return branch;
 		}	
 	}
