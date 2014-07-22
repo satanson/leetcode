@@ -13,6 +13,7 @@ public:
 			}
 			tri[i][tri[i].size()-1]=1;
 		}
+		return tri;
     }
 };
 
