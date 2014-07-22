@@ -8,13 +8,14 @@ class Solution {
 	public:
 		void connect(TreeLinkNode *root) {
 			if (!root)return;
-			root->next=NULL;
 
+			root->next=NULL;
 			TreeLinkNode *father;
 			father=root;
+
 			while(father){
 				TreeLinkNode *p=father;
-				while(!p && !p->left && !p->right)p=p->next;
+				while(p && !p->left && !p->right)p=p->next;
 				if (!p)break;
 
 				father=p;
@@ -35,17 +36,16 @@ class Solution {
 							child=elder->right;
 						}
 					}else{
-						if (elder->left)child=elder->left;
-						else child=elder->right;
+						child=elder->right;
 					}
 
 					TreeLinkNode *uncle=elder->next;
-					while(!uncle && !uncle->left && !uncle->right)uncle=uncle->next;
+					while(uncle && !uncle->left && !uncle->right)uncle=uncle->next;
 
 					if (!uncle)child->next=NULL;
 					else {
 						TreeLinkNode* cousin;
-						if(!uncle->left)cousin=uncle->left;
+						if(uncle->left)cousin=uncle->left;
 						else cousin=uncle->right; 
 						child->next=cousin;
 					}
@@ -58,4 +58,15 @@ class Solution {
 };
 int main(){
 
+	TreeLinkNode node1(1);
+	TreeLinkNode node2(2);
+	TreeLinkNode node3(3);
+	TreeLinkNode node4(4);
+	TreeLinkNode node5(5);
+	node1.left=&node2;
+	node1.left->left=&node4;
+	node1.right=&node3;
+	node1.right->right=&node5;
+	Solution so;
+	so.connect(&node1);
 }
