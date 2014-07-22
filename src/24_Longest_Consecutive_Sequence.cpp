@@ -1,40 +1,32 @@
 #include<cppstdlib.hpp>
 class Solution {
 public:
-	typedef list<int> LIST;
-	typedef unordered_map<int,LIST*> MAP;
-    int longestConsecutive(vector<int> &num) {
-		MAP m;
-		set<LIST*> s;
+    int longestConsecutive(vector<int> &num){
+		unordered_set<int> s;
+		for(int i=0;i<num.size();i++)s.insert(num[i]);
+		int max=0;
 		for(int i=0;i<num.size();i++){
 			int n=num[i];
-			if (m.count(n))continue;
-			if (!m.count(n-1)&&!m.count(n+1)){
-				m[n]=new LIST();
-			}else if (!m.count(n-1)&&m.count(n+1)){
-				s.erase(m[n+1]);
-				m[n]=m[n+1];
-			}else if (m.count(n-1)&&!m.count(n+1)){
-				s.erase(m[n-1]);
-				m[n]=m[n-1];
-			}else{
-				s.erase(m[n-1]);
-				s.erase(m[n+1]);
-				m[n-1]->splice(m[n-1]->end(),*m[n+1]);
-				m[n]=m[n-1];
-				m[n+1]=m[n-1];
+			int count=1;
+			if(s.count(n)){
+				int prev=n-1;
+				s.erase(n);
+				while(s.count(prev)){
+					count++;
+					s.erase(prev);
+					prev--;
+				}
+				int next=n+1;
+				while(s.count(next)){
+					count++;
+					s.erase(next);
+					next++;
+				}
 			}
-			m[n]->push_back(n);
-			s.insert(m[n]);
+			max=count>max?count:max;
 		}
-		int N=0;
-		set<LIST*>::iterator it;
-		for (it=s.begin();it!=s.end();it++){
-			if ((*it)->size()>N)N=(*it)->size();
-			delete *it;
-		}
-		return N;
-    }
+		return max;
+	}
 };
 int main()
 {
