@@ -10,7 +10,7 @@ public:
     int minDepth(TreeNode *root) {
 		list<int> depths;
 		if(root)preOrder(root,0,depths);
-		return std::min_element(depths.begin(),depths.end());
+		return *std::min_element(depths.begin(),depths.end());
     }
 	void preOrder(TreeNode *branch,int depth,list<int>& depths){
 
