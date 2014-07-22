@@ -1,12 +1,41 @@
 #include<cppstdlib.hpp>
+ struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+ };
+
+
  struct TreeNode {
      int val;
      TreeNode *left;
      TreeNode *right;
      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  };
+
 class Solution {
 public:
+    TreeNode *sortedListToBST(ListNode *head) {		
+    }
+	void insert(TreeNode *branch,int val,list<TreeNode*>& path){
+		list<TreeNode*> path;
+		if(val<branch.val){
+			path.push_back(branch);
+			if (branch->left)insert(branch->left,val,path);
+			else{
+				branch->left=new TreeNode(val);
+				path.push_back(branch->left);
+			}
+		}else (branch.val<val){
+			path.push_back(branch);
+			if (branch->right)insert(branch->right,val,path);
+			else{
+				branch->right=new TreeNode(val);
+				path.push_back(branch->right);
+			}
+		}else{
+		}
+	}
     bool isBalanced(TreeNode *root) {
 		list<int> depths;
 		int height;
@@ -34,44 +63,7 @@ public:
 		height=std::max(lheight,rheight)+1;
 		return abs(rheight-lheight)<=1;
 	}
+	void adjust(TreeNode *branch){
+		if branc
+	}
 };
-
-int main(){
-
-	Solution so;
-	{
-		TreeNode n1(5);
-		TreeNode n2(4);
-		TreeNode n3(8);
-		n1.left=&n2;
-		n1.right=&n3;
-		
-		TreeNode n4(11);
-		n2.left=&n4;
-
-		TreeNode n5(13);
-		TreeNode n6(4);
-		n3.left=&n5;
-		n3.right=&n6;
-
-		TreeNode n7(7);
-		TreeNode n8(2);
-		TreeNode n9(5);
-		TreeNode n10(1);
-		n4.left=&n7;
-		n4.right=&n8;
-		n6.left=&n9;
-		n6.right=&n10;
-		cout<<boolalpha<<so.isBalanced(&n1)<<endl;
-	}
-	{
-		TreeNode n1(1);
-		TreeNode n2(2);
-		TreeNode n3(3);
-		TreeNode n4(4);
-		n1.left=&n2;
-		n1.right=&n3;
-		n3.left=&n4;
-		cout<<boolalpha<<so.isBalanced(&n1)<<endl;
-	}
-}
