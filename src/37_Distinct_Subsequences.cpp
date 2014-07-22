@@ -15,7 +15,7 @@ public:
 			for(n=0;n<m;n++)o[n][m]=0;
 		for(m=1;m<M;m++)
 			for(n=m;n<N;n++){
-				if (S[n-1]==S[m-1])o[n][m]=o[n-1][m]+o[n-1][m-1];
+				if (S[n-1]==T[m-1])o[n][m]=o[n-1][m]+o[n-1][m-1];
 				else o[n][m]=o[n-1][m];
 			}
 		return o[N-1][M-1];
