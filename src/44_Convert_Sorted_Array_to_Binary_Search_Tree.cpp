@@ -1,26 +1,7 @@
 #include<cppstdlib.hpp>
 #include<tree_serialize.hpp>
- struct ListNode {
-     int val;
-     ListNode *next;
-     ListNode(int x) : val(x), next(NULL) {}
- };
-
-
- struct TreeNode {
-     int val;
-     TreeNode *left;
-     TreeNode *right;
-     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- };
-
 class Solution {
 public:
-    TreeNode *sortedListToBST(ListNode *head) {	
-		vector<int> num;
-		while(head){num.push_back(head->val);head=head->next;}
-		return sortedArrayToBST(num);
-    }
     TreeNode *sortedArrayToBST(vector<int> &num) {
 		if(num.size()==0)return NULL;
 		int low=0,high=num.size(),mid=(low+high)/2;
@@ -41,3 +22,16 @@ public:
 		}
 	}
 };
+
+int main(){
+	string line;
+	Solution so;
+	while(getline(cin,line)){
+		stringstream ss(line);
+		vector<int> num;
+		int n;
+		while(ss>>n)num.push_back(n);
+		TreeNode* root=so.sortedArrayToBST(num);
+		cout<<tree2string(root)<<endl;
+	}
+}
