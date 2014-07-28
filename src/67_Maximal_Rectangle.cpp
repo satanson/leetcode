@@ -18,16 +18,14 @@ public:
 		}
 LOOP:
 		if (x==right && y==bottom){
-			cout<<"("<<left<<","<<top<<");"
-				<<"("<<right<<","<<bottom<<")"<<endl;
 			return width*height;
 		} else{
 			int area=0;
-			int subarea=maxArea(matrix,left,top,x-1,y-1);
+			int subarea=maxArea(matrix,left,top,x,y);
 			if (area<subarea)area=subarea;
-			subarea=maxArea(matrix,left,y+1,x-1,bottom);
+			subarea=maxArea(matrix,left,y+1,x,bottom);
 			if (area<subarea)area=subarea;
-			subarea=maxArea(matrix,x+1,top,right,y-1);
+			subarea=maxArea(matrix,x+1,top,right,y);
 			if (area<subarea)area=subarea;
 			subarea=maxArea(matrix,x+1,y+1,right,bottom);
 			if (area<subarea)area=subarea;
