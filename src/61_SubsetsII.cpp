@@ -1,4 +1,5 @@
 #include<cppstdlib.hpp>
+#include<list_serialize.hpp>
 
 class Solution{
 public:
@@ -15,8 +16,8 @@ public:
 			int n=a[i].second;
 			while(!v1.empty()){
 				vector<int> v;
-				std::swap(v1.front(),v);
-				v1.pop_front();
+				std::swap(v1.back(),v);
+				v1.pop_back();
 
 				v2.push_back(v);
 				for (int j=0;j<n;j++){
@@ -26,8 +27,9 @@ public:
 			}
 			std::swap(v1,v2);
 		}
+		return v1;
 	}
-}
+};
 
 int main(){
 	Solution so;
@@ -35,6 +37,7 @@ int main(){
 	while(getline(cin,line)){
 		vector<int> s=string2vector(line);
 		vector<vector<int>> v=so.subsetsWithDup(s);
+		cout<<string(5,'#')<<v.size()<<string('5','#')<<endl;
 		for (int i=0;i<v.size();i++)cout<<vector2string(v[i])<<endl;
 		cout<<string(10,'#')<<endl;
 	}

@@ -30,11 +30,15 @@ string list2string(const ListNode* L){
 }
 
 vector<int> string2vector(const string& s){
-	list<int> L=string2list(s);
-	return vector<int>(L.begin(),L.end());
+	stringstream ss(s);
+	int val;
+	vector<int> v;
+	while(ss>>val)v.push_back(val);
+	return v;
 }
 
-string<int> vector2string(const vector<int>& v){
-	list<int> L(v.begin(),v.end());
-	return list2string(L);
+string vector2string(const vector<int>& v){
+	stringstream ss;
+	for(int i=0;i<v.size();i++)ss<<v[i]<<" ";
+	return ss.str();
 }
