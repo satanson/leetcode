@@ -4,6 +4,7 @@ public:
 	vector<int> greyCode(int n){
 		if (n<1)return vector<int>();
 		vector<int> v;
+		v.reserve(1<<n);
 		v.push_back(0);
 		v.push_back(1);
 		for (int i=1;i<n;i++){
