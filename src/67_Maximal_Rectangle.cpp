@@ -21,13 +21,17 @@ LOOP:
 			return width*height;
 		} else{
 			int area=0;
-			int subarea=maxArea(matrix,left,top,x,y);
+			//left
+			int subarea=maxArea(matrix,left,top,x,bottom);
 			if (area<subarea)area=subarea;
-			subarea=maxArea(matrix,left,y+1,x,bottom);
+			//right
+			subarea=maxArea(matrix,x+1,top,right,bottom);
 			if (area<subarea)area=subarea;
-			subarea=maxArea(matrix,x+1,top,right,y);
+			//top
+			subarea=maxArea(matrix,left,top,right,y);
 			if (area<subarea)area=subarea;
-			subarea=maxArea(matrix,x+1,y+1,right,bottom);
+			//bottom
+			subarea=maxArea(matrix,left,y+1,right,bottom);
 			if (area<subarea)area=subarea;
 			return area;
 		}
