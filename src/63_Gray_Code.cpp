@@ -1,13 +1,11 @@
 #include<cppstdlib.hpp>
 class Solution{
 public:
-	vector<int> greyCode(int n){
-		if (n<1)return vector<int>();
+	vector<int> grayCode(int n){
 		vector<int> v;
 		v.reserve(1<<n);
 		v.push_back(0);
-		v.push_back(1);
-		for (int i=1;i<n;i++){
+		for (int i=0;i<n;i++){
 			int m=1<<i;
 			for( int j=m-1;j>=0;j--){
 				v.push_back(m+v[j]);
