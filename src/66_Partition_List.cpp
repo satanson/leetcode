@@ -19,6 +19,7 @@ public:
 		}
 		p=lt_head->next;
 		lt_tail->next=ge_head->next;
+		ge_tail->next=NULL;
 		delete lt_head;
 		delete ge_head;
 		return p;
