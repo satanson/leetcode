@@ -33,12 +33,23 @@ public:
 		int height=bottom-top;
 		if (width<=0 || height<=0) return 0;
 		if (width==1 && height==1 && matrix[left][top]=='1')return 1;
-		int x=0,y=0;
-		for ( x=left;x<right;x++){
-			for (y=top;y<bottom;y++){
+		bool xflip=true,yflip=true;
+
+		int x=(left+right)/2,y=(top+bottom)/2;
+		int xcount=1,ycount=1;
+		while(left<=x && x<right){
+			while(top<=y && y<bottom){ 
 				if (matrix[x][y]=='0')goto LOOP;
+				if (yflip)y-=ycount;else y+=ycount;
+				++ycount;
+				yflip=!yflip;
 			}
+			if (xflip) x-=xcount; else x+=xcount;
+			++xcount;
+			xflip=!xflip;
 		}
+
+		x=right;y=bottom;
 LOOP:
 		if (x==right && y==bottom){
 			return width*height;
