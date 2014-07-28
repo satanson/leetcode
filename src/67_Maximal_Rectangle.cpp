@@ -23,7 +23,7 @@ public:
 
 		for (int w=2;w<=W;w++){
 			for (int x=0;x+w<=W;x++){
-				for (int y=0;y<=H;y++){
+				for (int y=0;y<H;y++){
 					if (d[x][y][1][1] && d[x+1][y][w-1][1]){
 						d[x][y][w][1]=true;
 						if (area<w)area=w;
@@ -31,8 +31,8 @@ public:
 				}
 			}
 		}
-		for (int h=2;h<=W;h++){
-			for (int x=0;x<=W;x++){
+		for (int h=2;h<=H;h++){
+			for (int x=0;x<W;x++){
 				for (int y=0;y+h<=H;y++){
 					if (d[x][y][1][1] && d[x][y+1][1][h-1]){
 						d[x][y][1][h]=true;
@@ -48,8 +48,8 @@ public:
 					for (int y=0;y+h<=H;y++){
 						if (d[x][y][1][1]&&
 								d[x+1][y][w-1][h]&&
-								d[x][y-1][w][h-1]&&
-								d[x-1][y-1][w-1][h-1]){
+								d[x][y+1][w][h-1]&&
+								d[x+1][y+1][w-1][h-1]){
 
 							d[x][y][w][h]=true;
 							int area0=w*h;
