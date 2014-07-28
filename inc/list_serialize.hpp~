@@ -14,7 +14,7 @@ ListNode* string2list(const string& s){
 		if (!tail) head=tail=t;	
 		else{
 			tail->next=t;
-			t=tail->next;
+			tail=t;
 		}
 	}
 	return head;
@@ -27,4 +27,14 @@ string list2string(const ListNode* L){
 		L=L->next;
 	}
 	return ss.str();
+}
+
+vector<int> string2vector(const string& s){
+	list<int> L=string2list(s);
+	return vector<int>(L.begin(),L.end());
+}
+
+string<int> vector2string(const vector<int>& v){
+	list<int> L(v.begin(),v.end());
+	return list2string(L);
 }
