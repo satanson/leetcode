@@ -1,11 +1,34 @@
 #include<cppstdlib.hpp>
 class Solution{
 public:
+
+    typedef unordered_map<int64_t,unordered_map<int64_t,int>> CACHE;
+	int64_t HL(int h,int l){
+		int64_t y=h;
+		y<<=32;
+		y+=l;
+		return y;
+	}
+	bool cached(CACHE& cache,int l,int r,int t,int b){
+		int64_t key=HL(l,r),subkey=HL(t,b);
+		if (cache.count(key)==0|| cache[key].count(subkey)==0)return false;
+		return true;
+	}
+	int getCache(CACHE& cache,int l,int r,int t,int b){
+		int64_t key=HL(l,r),subkey=HL(t,b);
+		return cache[key][subkey];
+	}
+	void setCache(CACHE& cache,int l,int r,int t,int b,int area){
+		int64_t key=HL(l,r),subkey=HL(t,b);
+		cache[key][subkey]=area;
+	}
+
 	int maximalRectangle(vector<vector<char>> &matrix){
 		if (matrix.size()==0||matrix[0].size()==0)return 0;
-		return maxArea(matrix,0,0,matrix.size(),matrix[0].size());
+		unordered_map<int64_t,unordered_map<int64_t,int>> cache;
+		return maxArea(matrix,0,matrix.size(),0,matrix[0].size(),cache);
 	}
-	int maxArea(vector<vector<char>> &matrix,int left,int top,int right,int bottom){
+	int maxArea(vector<vector<char>> &matrix,int left,int right,int top,int bottom,CACHE& cache){
 		int width=right-left;
 		int height=bottom-top;
 		if (width<=0 || height<=0) return 0;
@@ -22,17 +45,46 @@ LOOP:
 		} else{
 			int area=0;
 			//left
-			int subarea=maxArea(matrix,left,top,x,bottom);
-			if (area<subarea)area=subarea;
+			int subarea=0;
+			if (area<(x-left)*(bottom-top)){
+				if (cached(cache,left,x,top,bottom)){
+					subarea=getCache(cache,left,x,top,bottom);
+				}else{
+					subarea=maxArea(matrix,left,x,top,bottom,cache);
+					setCache(cache,left,x,top,bottom,subarea);
+				}
+				if (area<subarea)area=subarea;
+			}
 			//right
-			subarea=maxArea(matrix,x+1,top,right,bottom);
-			if (area<subarea)area=subarea;
+			if (area<(right-x-1)*(bottom-top)){
+				if (cached(cache,x+1,right,top,bottom)){
+					subarea=getCache(cache,x+1,right,top,bottom);
+				}else{
+					subarea=maxArea(matrix,x+1,right,top,bottom,cache);
+					setCache(cache,x+1,right,top,bottom,subarea);
+				}
+				if (area<subarea)area=subarea;
+			}
 			//top
-			subarea=maxArea(matrix,left,top,right,y);
-			if (area<subarea)area=subarea;
+			if (area<(right-left)*(y-top)){
+				if (cached(cache,left,right,top,y)){
+					subarea=getCache(cache,left,right,top,y);
+				}else{
+					subarea=maxArea(matrix,left,right,top,y,cache);
+					setCache(cache,left,right,top,y,subarea);
+				}
+				if (area<subarea)area=subarea;
+			}
 			//bottom
-			subarea=maxArea(matrix,left,y+1,right,bottom);
-			if (area<subarea)area=subarea;
+			if (area<(right-left)*(bottom-y-1)){
+				if (cached(cache,left,right,y+1,bottom)){
+					subarea=getCache(cache,left,right,y+1,bottom);
+				}else{
+					subarea=maxArea(matrix,left,right,y+1,bottom,cache);
+					setCache(cache,left,right,y+1,bottom,subarea);
+				}
+				if (area<subarea)area=subarea;
+			}
 			return area;
 		}
 	}
