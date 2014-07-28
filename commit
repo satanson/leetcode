@@ -1,0 +1,5 @@
+#!/usr/bin/perl
+$msg=shift;
+qx(git add .);
+qx(git commit -m "$msg");
+qx(git push origin master);
