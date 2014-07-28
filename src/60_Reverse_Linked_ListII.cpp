@@ -30,8 +30,11 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
+		string mn;
+		getline(cin,mn);
+		stringstream ss(mn);
 		int m,n;
-		cin>>m>>n;
+		ss>>m>>n;
 		cout<<list2string(so.reverseBetween(string2list(line),m,n))<<endl;
 	}
 }
