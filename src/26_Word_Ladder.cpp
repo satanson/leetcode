@@ -3,7 +3,7 @@ class Solution {
 public:
     int ladderLength(string start, string end, unordered_set<string> &dict) {
 		vector<string> v;
-		v.resize(dict.size()+2);
+		v.reserve(dict.size()+2);
 		v.push_back(start);
 		v.push_back(end);
 		for (auto it=dict.begin();it!=dict.end();it++){
