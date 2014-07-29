@@ -38,6 +38,9 @@ public:
 		int x=(left+right)/2,y=(top+bottom)/2;
 		int xcount=1,ycount=1;
 		while(left<=x && x<right){
+			yflip=true;
+			y=(top+bottom)/2;
+			ycount=1;
 			while(top<=y && y<bottom){ 
 				if (matrix[x][y]=='0')goto LOOP;
 				if (yflip)y-=ycount;else y+=ycount;
