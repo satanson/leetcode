@@ -1,108 +1,44 @@
 #include<cppstdlib.hpp>
 class Solution{
 public:
+	struct Hx{int H,x; Hx(int a,int b):H(a),x(b){}};
 
-    typedef unordered_map<int64_t,unordered_map<int64_t,int>> CACHE;
-	int64_t HL(int h,int l){
-		int64_t y=h;
-		y<<=32;
-		y+=l;
-		return y;
-	}
-	bool cached(CACHE& cache,int l,int r,int t,int b){
-		int64_t key=HL(l,r),subkey=HL(t,b);
-		if (cache.count(key)==0|| cache[key].count(subkey)==0)return false;
-		return true;
-	}
-	int getCache(CACHE& cache,int l,int r,int t,int b){
-		int64_t key=HL(l,r),subkey=HL(t,b);
-		return cache[key][subkey];
-	}
-	void setCache(CACHE& cache,int l,int r,int t,int b,int area){
-		int64_t key=HL(l,r),subkey=HL(t,b);
-		cache[key][subkey]=area;
-	}
+	int largestRectangleArea(vector<int> &height){
+		vector<Hx> stk_internal;
+		stk_internal.reserve(height.size()+1);
+		stack<Hx,vector<Hx>> stk(stk_internal);
+		stk.push(Hx(0,-1));
+		int maxArea=0;
+		int N=height.size();
+		for(int i=0;i<=N;i++){
+			int h= i<N?height[i]:0;
 
-	int maximalRectangle(vector<vector<char>> &matrix){
-		if (matrix.size()==0||matrix[0].size()==0)return 0;
-		unordered_map<int64_t,unordered_map<int64_t,int>> cache;
-		return maxArea(matrix,0,matrix.size(),0,matrix[0].size(),cache);
-	}
-	int maxArea(vector<vector<char>> &matrix,int left,int right,int top,int bottom,CACHE& cache){
-		int width=right-left;
-		int height=bottom-top;
-		if (width<=0 || height<=0) return 0;
-		if (width==1 && height==1 && matrix[left][top]=='1')return 1;
-		bool xflip=true,yflip=true;
-
-		int x=(left+right)/2,y=(top+bottom)/2;
-		int xcount=1,ycount=1;
-		while(left<=x && x<right){
-			yflip=true;
-			y=(top+bottom)/2;
-			ycount=1;
-			while(top<=y && y<bottom){ 
-				if (matrix[x][y]=='0')goto LOOP;
-				if (yflip)y-=ycount;else y+=ycount;
-				++ycount;
-				yflip=!yflip;
+			//a dummy Hx on bottom of stack
+			while(stk.size()>1 && stk.top().H>=h){
+				Hx p=stk.top();stk.pop();
+				int area=p.H*(i-stk.top().x-1);
+				if (area>maxArea)maxArea=area;
 			}
-			if (xflip) x-=xcount; else x+=xcount;
-			++xcount;
-			xflip=!xflip;
+			stk.push(Hx(h,i));
 		}
-
-		x=right;y=bottom;
-LOOP:
-		if (x==right && y==bottom){
-			return width*height;
-		} else{
-			int area=0;
-			//left
-			int subarea=0;
-			if (area<(x-left)*(bottom-top)){
-				if (cached(cache,left,x,top,bottom)){
-					subarea=getCache(cache,left,x,top,bottom);
-				}else{
-					subarea=maxArea(matrix,left,x,top,bottom,cache);
-					setCache(cache,left,x,top,bottom,subarea);
-				}
-				if (area<subarea)area=subarea;
-			}
-			//right
-			if (area<(right-x-1)*(bottom-top)){
-				if (cached(cache,x+1,right,top,bottom)){
-					subarea=getCache(cache,x+1,right,top,bottom);
-				}else{
-					subarea=maxArea(matrix,x+1,right,top,bottom,cache);
-					setCache(cache,x+1,right,top,bottom,subarea);
-				}
-				if (area<subarea)area=subarea;
-			}
-			//top
-			if (area<(right-left)*(y-top)){
-				if (cached(cache,left,right,top,y)){
-					subarea=getCache(cache,left,right,top,y);
-				}else{
-					subarea=maxArea(matrix,left,right,top,y,cache);
-					setCache(cache,left,right,top,y,subarea);
-				}
-				if (area<subarea)area=subarea;
-			}
-			//bottom
-			if (area<(right-left)*(bottom-y-1)){
-				if (cached(cache,left,right,y+1,bottom)){
-					subarea=getCache(cache,left,right,y+1,bottom);
-				}else{
-					subarea=maxArea(matrix,left,right,y+1,bottom,cache);
-					setCache(cache,left,right,y+1,bottom,subarea);
-				}
-				if (area<subarea)area=subarea;
-			}
-			return area;
-		}
+		return maxArea;
 	}
+	int maximalRectangle(vector<vector<char>>& matrix){
+		if (matrix.size()==0 || matrix[0].size()==0)return 0;
+		int M=matrix.size(),N=matrix[0].size();
+		vector<int> va(N);
+		
+		for (int i=0;i<N;i++)if(matrix[0][i]=='1')va[i]=1;else va[i]=0;
 
+		int maxArea=largestRectangleArea(va);
+		for (int i=1;i<M;i++){
+			for (int j=0;j<matrix[i].size();j++)if (matrix[i][j]=='1')va[j]+=1;else va[j]=0;
+
+			int area=largestRectangleArea(va);
+			if (area>maxArea)maxArea=area;
+		}
+		return maxArea;
+	}
 };
 
 int main(){

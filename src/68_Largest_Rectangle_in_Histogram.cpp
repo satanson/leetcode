@@ -2,22 +2,25 @@
 #include<list_serialize.hpp>
 class Solution {
 public:
-	typedef pair<int,int> PAIR;
-	int largestRectangleArea(vector<int> &height){
-		vector<PAIR> stack;
-		stack.reserve(height.size()+1);
-		stack.push_back(PAIR(0,-1));
-		int maxArea=0;
-		for(int i=0;i<=height.size();i++){
-			int h=height[i];
-			if (i==height.size())h=0;
+	struct Hx{int H,x; Hx(int a,int b):H(a),x(b){}};
 
-			while(stack.size()>1 && stack.back().first>=h){
-				PAIR p=stack.back();stack.pop_back();
-				int area=p.first*(i-stack.back().second-1);
+	int largestRectangleArea(vector<int> &height){
+		vector<Hx> stk_internal;
+		stk_internal.reserve(height.size()+1);
+		stack<Hx,vector<Hx>> stk(stk_internal);
+		stk.push(Hx(0,-1));
+		int maxArea=0;
+		int N=height.size();
+		for(int i=0;i<=N;i++){
+			int h= i<N?height[i]:0;
+
+			//a dummy Hx on bottom of stack
+			while(stk.size()>1 && stk.top().H>=h){
+				Hx p=stk.top();stk.pop();
+				int area=p.H*(i-stk.top().x-1);
 				if (area>maxArea)maxArea=area;
 			}
-			stack.push_back(PAIR(h,i));
+			stk.push(Hx(h,i));
 		}
 		return maxArea;
 	}
