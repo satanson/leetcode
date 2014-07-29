@@ -7,7 +7,7 @@ public:
 		vector<vector<string>> ladders;
 		q1.push_back(vector<string>());q1.back().push_back(start);
 		dict.insert(end);
-		while(!q1.empty() && dict.size()){
+		while(!q1.empty()){
 			while(!q1.empty()){
 
 				vector<string> path;std::swap(q1.back(),path);q1.pop_back();
@@ -16,10 +16,12 @@ public:
 					string s1=s;
 					for (char c='a';c<='z';c++){
 						s1[i]=c;
+
 						if (c==s[i])continue;
 						if (s1==end){
 							if(ladders.empty()||ladders.back().size()==path.size()+1){
-								ladders.push_back(vector<string>(path.begin(),path.end()));
+								ladders.push_back(vector<string>());
+								std::swap(ladders.back(),path);
 								ladders.back().push_back(s1);
 							}else continue;
 						}
