@@ -5,7 +5,10 @@ public:
 		list<list<int>> q1,q2;
 		vector<string> v;
 		v.reserve(dict.size()+2);
-		
+		v.push_back(start);
+		v.push_back(end);
+		dict.insert(end);
+
 		q1.push_back(list<int>());q1.back().push_back(0);
 		while(!q1.empty() &&!dict.empty()){
 			while(!q1.empty()){
