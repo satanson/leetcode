@@ -14,7 +14,7 @@ public:
 
 			while(stack.size()>1 && stack.back().first>=h){
 				PAIR p=stack.back();stack.pop_back();
-				int area=h*(i-stack.back().second-1);
+				int area=p.first*(i-stack.back().second-1);
 				if (area>maxArea)maxArea=area;
 			}
 			stack.push_back(PAIR(h,i));
