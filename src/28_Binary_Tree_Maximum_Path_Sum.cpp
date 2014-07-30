@@ -22,8 +22,8 @@ public:
 			sum=branch->val;
 			return sum;
 		}
-		int a[2]={~0};
-		int b[2]={~0};
+		int a[2]={~0,~0};
+		int b[2]={~0,~0};
 
 		if (branch->left) a[0]=maxPath(branch->left,b[0]);
 		if (branch->right) a[1]=maxPath(branch->right,b[1]);
