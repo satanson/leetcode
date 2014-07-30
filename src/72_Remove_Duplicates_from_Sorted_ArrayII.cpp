@@ -7,7 +7,7 @@ public:
 		   if (A[i]!=A[k]){A[++k]=A[i];cnt=1;continue;}
 		   if (A[i]==A[k]){
 			   ++cnt;
-			   if (cnt<=2) A[++k]==A[i];
+			   if (cnt<=2) A[++k]=A[i];
 		   }
 	   }
 	   return k+1;
