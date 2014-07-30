@@ -12,9 +12,9 @@ public:
 		q1.push_back(start);
 
 		while(!q1.empty()){
+			for (auto it=q1.begin();it!=q1.end();it++) dict.erase(*it);
 			while(!q1.empty()){
 				string s;std::swap(q1.back(),s);q1.pop_back();
-				dict.erase(s);
 				for (int i=0;i<s.size();i++){
 					string s1=s;
 					for (char c='a';c<='z';c++){
