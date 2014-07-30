@@ -23,7 +23,7 @@ public:
 			int p[3]={prices[l+1]-prices[l],prices[l+2]-prices[l],prices[l+2]-prices[l+1]};
 			return *std::max_element(p,p+3);
 		}
-		int m=(l-r)/2,lpmax,lpmin,rpmax,rpmin;
+		int m=(r-l)/2,lpmax,lpmin,rpmax,rpmin;
 		int lmaxprofit=dq_maxProfit(prices,l,m,lpmax,lpmin);
 		int rmaxprofit=dq_maxProfit(prices,m,r,rpmax,rpmin);
 		pmax=lpmax>rpmax?lpmax:rpmax;
