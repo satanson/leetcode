@@ -22,4 +22,6 @@
 #include<cassert>
 #include<csetjmp>
 #include<csignal>
+#include<cstdint>
+#include<climits>
 using namespace std;
