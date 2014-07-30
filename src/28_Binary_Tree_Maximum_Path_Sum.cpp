@@ -33,7 +33,7 @@ public:
 		else sum=branch->val+bb;
 
 		int aa=0;
-		if (branch->val>0){
+		if (branch->val>=0){
 			aa=branch->val;
 			if (b[0]>0)aa+=b[0];
 			if (b[1]>0)aa+=b[1];
