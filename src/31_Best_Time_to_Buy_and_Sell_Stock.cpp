@@ -15,7 +15,7 @@ public:
 				pmin=prices[l+1];
 				pmax=prices[l];
 			}
-			return pmax;
+			return prices[l+1]-prices[l];
 		}
 		if (r-l==3){
 			pmax=*std::max_element(&prices[l],&prices[r]);
@@ -28,7 +28,7 @@ public:
 		int rmaxprofit=dq_maxProfit(prices,m,r,rpmax,rpmin);
 		pmax=lpmax>rpmax?lpmax:rpmax;
 		pmin=lpmin<rpmin?lpmin:rpmin;
-		int maxprofit=lpmax-rpmin;
+		int maxprofit=rpmax-lpmin;
 		if (maxprofit>lmaxprofit && maxprofit>rmaxprofit)return maxprofit;
 		else return lmaxprofit>rmaxprofit?lmaxprofit:rmaxprofit;
 	}
