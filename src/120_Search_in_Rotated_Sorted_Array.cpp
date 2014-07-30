@@ -37,10 +37,8 @@ public:
 			return A[l]==x?l:-1;
 		}
 		int m=(h+l)/2;
-		if (A[m]==x) return m;
-
-		int rc=binsearch(A,x,l,m);
-		if (rc!=-1)return rc;
+		if (x==A[m]) return m;
+		if (x<A[m])return binsearch(A,x,l,m);
 		else return binsearch(A,x,m+1,h);
 	}
 };
