@@ -3,8 +3,8 @@ class Solution {
 public:
     vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
 
-		unordered_map<string,list<string>> trace;
-		list<string> q1,q2;
+		unordered_map<string,vector<string>> trace;
+		vector<string> q1,q2;
 
 		dict.insert(start);
 		dict.insert(end);
@@ -36,7 +36,7 @@ public:
 		buildPath(trace,end,path,ladders);
 		return ladders;
 	}
-	void buildPath(unordered_map<string,list<string>>& trace, string& word, vector<string>& path,
+	void buildPath(unordered_map<string,vector<string>>& trace, string& word, vector<string>& path,
 			vector<vector<string>>& ladders){
 		if (trace[word].size()==0){
 			path.push_back(word);
