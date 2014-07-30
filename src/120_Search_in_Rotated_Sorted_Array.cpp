@@ -6,12 +6,14 @@ public:
 		if (pivot==-1){
 			return binsearch(A,target,0,n);
 		}else{
+			if (A[pivot]==target)return pivot;
 			int rc=binsearch(A,target,0,pivot);
 			if (rc!=-1)return rc;
-			else return binsearch(A,target,pivot,n);
+			else return binsearch(A,target,pivot+1,n);
 		}
     }
 	int findpivot(int A[],int n,int l,int h){
+		if (h-l==0) return -1;
 		if(h-l==1){
 			//if(l==0 && A[l]>A[l+1])return l;
 			//else if (l==n-1 && A[l]<A[l-1]) return l;
@@ -22,18 +24,24 @@ public:
 			return -1;
 		}
 		int m=(l+h)/2;
+		if (m>0 && A[m-1]>A[m]) return m;
+		if (m<n-1 && A[m]>A[m+1]) return m+1;
+
 		int rc=findpivot(A,n,l,m);
 		if (rc!=-1)return rc;
-		else return findpivot(A,n,m,h);
+		else return findpivot(A,n,m+1,h);
 	}
 	int binsearch(int A[],int x,int l,int h){
+		if (h-l==0)return -1;
 		if (h-l==1){
 			return A[l]==x?l:-1;
 		}
 		int m=(h+l)/2;
+		if (A[m]==x) return m;
+
 		int rc=binsearch(A,x,l,m);
 		if (rc!=-1)return rc;
-		else return binsearch(A,x,m,h);
+		else return binsearch(A,x,m+1,h);
 	}
 };
 
