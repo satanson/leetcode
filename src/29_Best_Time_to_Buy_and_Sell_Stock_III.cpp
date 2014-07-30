@@ -3,6 +3,7 @@
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
+		if (prices.size()<2)return 0;
 		vector<int> till(prices.size()),since(prices.size());
 		till.front()=0;
 		int min_price=prices.front();
@@ -20,7 +21,7 @@ public:
 		}
 
 		int max_profit=0;
-		for (int i=1;i<prices.size()-1;i++){
+		for (int i=0;i<prices.size();i++){
 			int profit=till[i]+since[i];
 			if (profit>max_profit)max_profit=profit;
 		}
