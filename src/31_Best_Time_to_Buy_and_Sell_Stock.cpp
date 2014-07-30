@@ -4,7 +4,8 @@ public:
     int maxProfit(vector<int> &prices) {
 		if(prices.size()<2)return 0;
 		int pmax,pmin;
-		return dq_maxProfit(prices,0,prices.size(),pmax,pmin);
+		int rc=dq_maxProfit(prices,0,prices.size(),pmax,pmin);
+		return rc<0?0:rc;
     }
 	int dq_maxProfit(vector<int>&prices,int l,int r,int& pmax,int& pmin){
 		if (r-l==2){
