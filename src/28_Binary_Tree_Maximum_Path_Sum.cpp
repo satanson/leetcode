@@ -17,25 +17,32 @@ public:
 		sum1=maxPath(root,sum2);
 		return sum1<sum2?sum2:sum1;
     }
-	int maxPath(TreeNode *branch,int& max_sum){
+	int maxPath(TreeNode *branch,int& sum){
 		if (!branch->left && !branch->right){ 
-			max_sum=branch->val;
-			return max_sum;
+			sum=branch->val;
+			return sum;
 		}
-		int left_max=0,right_max=0,left_max_path=0,right_max_path=0;
-		if (branch->left) left_max=maxPath(branch->left,left_max_path);
-		if (branch->right) right_max=maxPath(branch->right,right_max_path);
-		
-		max_sum=branch->val;
-		max_sum+=(left_max_path>right_max_path)?left_max_path:right_max_path;
-		
-		int sum=branch->val;
-		sum+=left_max_path>0?left_max_path:0;
-		sum+=right_max_path>0?right_max_path:0;
+		int a[2]={~0};
+		int b[2]={~0};
 
-		if (right_max<sum &&right_max<sum)return sum;
-		else if (right_max<left_max)return left_max;
-		else return right_max;
+		if (branch->left) a[0]=maxPath(branch->left,b[0]);
+		if (branch->right) a[1]=maxPath(branch->right,b[1]);
+		
+		int bb=*std::max_element(b,b+2);
+		if (bb<0)sum=branch->val;
+		else sum=branch->val+bb;
+
+		int aa=0;
+		if (branch->val>0){
+			aa=branch->val;
+			if (b[0]>0)aa+=b[0];
+			if (b[1]>0)aa+=b[1];
+		}else{
+			aa=bb;
+		}
+		int a_max=*std::max_element(a,a+2);
+		if (a_max>aa)return a_max;
+		else return aa;
 	}
 };
 
