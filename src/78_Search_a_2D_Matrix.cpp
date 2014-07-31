@@ -18,9 +18,9 @@ public:
 		if (matrix[mx][my]==target)
 			return true;
 		else if (matrix[mx][my]<target)
-			return binsearch(matrix,target,l,m);
-		else 
 			return binsearch(matrix,target,m+1,h);
+		else 
+			return binsearch(matrix,target,l,m);
 	}
 };
 
