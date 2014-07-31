@@ -4,7 +4,7 @@ public:
     vector<vector<int> > combine(int n, int k) {
 		vector<vector<int>> s;
 		if (n<k) return s;
-		int N=factorial(n)/factorial(k)/factorial(n-k);
+		long long N=factorial(n)/factorial(k)/factorial(n-k);
 		s.reserve(N);
 		s.push_back(vector<int>(k));
 		for(int i=0;i<k;i++)s[0][i]=i+1;
@@ -24,8 +24,8 @@ public:
 		}
 		return s;
     }
-	int factorial(int n){
-		int m=1;
+	long long factorial(long long n){
+		long long m=1;
 		while(n>0){m*=n;--n;}
 		return m;
 	}
