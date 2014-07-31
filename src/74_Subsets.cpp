@@ -9,7 +9,7 @@ public:
 		for (int i=0;i<N;i++){
 			int bit_i=1<<i;
 			for (int j=0;j<sets.size();j++){
-				if (bit_i&j==bit_i) sets[j].push_back(S[i]);
+				if (bit_i&j) sets[j].push_back(S[i]);
 			}
 		}
 		return sets;
