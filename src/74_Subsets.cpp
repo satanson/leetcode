@@ -5,6 +5,7 @@ public:
     vector<vector<int> > subsets(vector<int> &S) {
 		int N=S.size();
 		int N2=1<<N;
+		sort(S.begin(),S.end());
 		vector<vector<int>> sets(N2);
 		for (int i=0;i<N;i++){
 			int bit_i=1<<i;
