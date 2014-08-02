@@ -14,7 +14,7 @@ public:
 				wc=1;
 			}else{
 			//rest words of the line
-				if (len+1+words[eol].size()<L){
+				if (len+1+words[eol].size()<=L){
 					++wc;
 					len+=1+words[eol].size();
 				}else{
