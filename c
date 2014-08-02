@@ -6,5 +6,7 @@ getopts('g') or die "invalid argument";
 my $SRC=join " ",map{m#.*/(\w*\.cpp)\z#;$1} grep {m#\.cpp\z#}@ARGV;
 my $dbg="";
 $dbg="dbg=1" if $opt_g;
-print qq(make $dbg -B SRC="$SRC"),"\n";
-system qq(make $dbg -B SRC="$SRC");
+for my $src (split /\s+/,$SRC){
+	print qq(make $dbg -B SRC="$src"),"\n";
+	system qq(make $dbg -B SRC="$src") if -s "src/$src";
+}

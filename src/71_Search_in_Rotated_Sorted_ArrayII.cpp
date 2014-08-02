@@ -49,10 +49,10 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> A=string2vector(line);
+		vector<int> A=string2vector<int>(line);
 		//cout<<so.findpivot(&A[0],A.size(),0,A.size())<<endl;
 		getline(cin,line);
-		vector<int> xs=string2vector(line);
+		vector<int> xs=string2vector<int>(line);
 		for (int i=0;i<xs.size();i++){
 			cout<<boolalpha<<so.search(&A[0],A.size(),xs[i])<<endl;
 		}

@@ -29,16 +29,18 @@ string list2string(const ListNode* L){
 	return ss.str();
 }
 
-vector<int> string2vector(const string& s){
+template <typename T>
+vector<T> string2vector(const string& s){
 	stringstream ss(s);
-	int val;
-	vector<int> v;
+	T val;
+	vector<T> v;
 	while(ss>>val)v.push_back(val);
 	return v;
 }
 
-string vector2string(const vector<int>& v){
+template <typename T>
+string vector2string(const vector<T>& v,string sep=" "){
 	stringstream ss;
-	for(int i=0;i<v.size();i++)ss<<v[i]<<" ";
+	for(int i=0;i<v.size();i++)ss<<v[i]<<sep;
 	return ss.str();
 }

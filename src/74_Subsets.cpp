@@ -21,7 +21,7 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> S=string2vector(line);
+		vector<int> S=string2vector<int>(line);
 		vector<vector<int>> sets=so.subsets(S);
 		for (int i=0;i<sets.size();i++){
 			cout<<"[";

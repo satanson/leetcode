@@ -34,7 +34,7 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> S=string2vector(line);
+		vector<int> S=string2vector<int>(line);
 		vector<vector<int>> sets=so.combine(S[0],S[1]);
 		for (int i=0;i<sets.size();i++){
 			cout<<"[";

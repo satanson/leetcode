@@ -19,8 +19,8 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> v=string2vector(line);
+		vector<int> v=string2vector<int>(line);
 		v.resize(so.removeDuplicates(&v[0],v.size()));
-		cout<<vector2string(v)<<endl;
+		cout<<vector2string<int>(v)<<endl;
 	}
 }

@@ -47,9 +47,9 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> A=string2vector(line);
+		vector<int> A=string2vector<int>(line);
 		getline(cin,line);
-		vector<int> xs=string2vector(line);
+		vector<int> xs=string2vector<int>(line);
 		for (int i=0;i<xs.size();i++){
 			int j=so.search(&A[0],A.size(),xs[i]);
 			cout<<j<<":"<<(j==-1?0:A[j])<<endl;

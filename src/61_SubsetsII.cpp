@@ -35,10 +35,10 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> s=string2vector(line);
+		vector<int> s=string2vector<int>(line);
 		vector<vector<int>> v=so.subsetsWithDup(s);
 		cout<<string(5,'#')<<v.size()<<string('5','#')<<endl;
-		for (int i=0;i<v.size();i++)cout<<vector2string(v[i])<<endl;
+		for (int i=0;i<v.size();i++)cout<<vector2string<int>(v[i])<<endl;
 		cout<<string(10,'#')<<endl;
 	}
 }

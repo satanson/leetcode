@@ -30,9 +30,9 @@ int main(){
 	vector<int> targets;
 	vector<vector<int>> matrix;
 	getline(cin,line);
-	targets=string2vector(line);
+	targets=string2vector<int>(line);
 	while(getline(cin,line)){
-		matrix.push_back(string2vector(line));
+		matrix.push_back(string2vector<int>(line));
 	}
 	for (int i=0;i<targets.size();i++){
 		cout<<boolalpha<<so.searchMatrix(matrix,targets[i])<<endl;

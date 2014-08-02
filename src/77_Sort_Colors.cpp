@@ -18,8 +18,8 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> array=string2vector(line);
+		vector<int> array=string2vector<int>(line);
 		so.sortColors(&array[0],array.size());
-		cout<<vector2string(array)<<endl;
+		cout<<vector2string<int>(array)<<endl;
 	}
 }

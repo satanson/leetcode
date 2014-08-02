@@ -5,6 +5,7 @@ public:
 		if(path.size()==0)return "";
 		list<string> pcomps;
 		size_t b=0,e=string::npos;
+		path+='/';
 		while((e=path.find('/',b))!=string::npos){
 			if (e==0){
 				/* /=>/ */

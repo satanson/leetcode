@@ -23,7 +23,7 @@ int main(){
 	Solution so;
 	string line;
 	while(getline(cin,line)){
-		vector<int> v=string2vector(line);
+		vector<int> v=string2vector<int>(line);
 		cout<<so.maxProfit(v)<<endl;
 	}
 }

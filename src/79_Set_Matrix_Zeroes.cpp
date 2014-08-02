@@ -30,7 +30,7 @@ int main(){
 	string line;
 	vector<vector<int>> matrix;
 	while(getline(cin,line)){
-		matrix.push_back(string2vector(line));
+		matrix.push_back(string2vector<int>(line));
 	}
 	so.setZeroes(matrix);
 	cout<<string(matrix.size(),'#')<<endl;
