@@ -1,5 +1,7 @@
 #include<iostream>
 #include<sstream>
+#include<istream>
+#include<fstream>
 #include<algorithm>
 #include<list>
 #include<vector>

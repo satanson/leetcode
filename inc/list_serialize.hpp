@@ -5,6 +5,32 @@ struct ListNode{
 	ListNode(int x):val(x),next(NULL){}
 };
 
+// Definition for an interval.
+struct Interval {
+	int start;
+	int end;
+	Interval() : start(0), end(0) {}
+	Interval(int s, int e) : start(s), end(e) {}
+	friend ostream& operator<<(ostream& out,const Interval& interval){
+		out<<"["<<interval.start<<","<<interval.end<<"]";
+		return out;
+	}
+	friend istream& operator>>(istream& in,Interval& interval){
+		char c=0;
+		while(in.get(c)){
+			if(c=='['){
+				in>>interval.start;
+				continue;
+			}else if (c==','){
+				in>>interval.end;
+			}else if (c==']'){
+				break;
+			}
+		}
+		return in;
+	}
+};
+
 ListNode* string2list(const string& s){
 	stringstream ss(s);
 	int val;
