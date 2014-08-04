@@ -2,29 +2,30 @@
 class Solution {
 public:
 	vector<int> spiralOrder(vector<vector<int> > &matrix) {
-		int N=matrix.size();
 		vector<int> seq;
-		seq.reserve(N*N);
+		if (matrix.size()==0 || matrix[0].size()==0) return seq;
+		int M=matrix.size(),N=matrix[0].size();
+		seq.reserve(M*N);
 		bool flip=true;
 		int start=0;
-		int tr_r=0,tr_c=0,bl_r=N-1,bl_c=N-2;
-		for (int i=N;i>0;--i){
+		int tr_r=0,tr_c=0,bl_r=M-1,bl_c=N-2;
+		for (int i=M;i>0;--i){
 			if(flip)
-				walk_topright(matrix,i,tr_r++,tr_c++,seq);
+				walk_topright(matrix,i,i+N-M,tr_r++,tr_c++,seq);
 			else
-				walk_bottomleft(matrix,i,bl_r--,bl_c--,seq);
+				walk_bottomleft(matrix,i,i+N-M,bl_r--,bl_c--,seq);
 			flip=!flip;
 		}
 		return seq;
 	}
-	void walk_topright(vector<vector<int>>& matrix,int n,int r,int c,vector<int>& seq){
-		for(int i=0;i<n-1;i++)seq.push_back(matrix[r][c+i]);
-		for(int i=0;i<n;i++)seq.push_back(matrix[r+i][c+n-1]);
+	void walk_topright(vector<vector<int>>& matrix,int m,int n,int r,int c,vector<int>& seq){
+		for(int i=0;i<m-1;i++)seq.push_back(matrix[r][c+i]);
+		for(int i=0;i<n;i++)seq.push_back(matrix[r+i][c+m-1]);
 	}
 
-	void walk_bottomleft(vector<vector<int>>& matrix,int n,int r,int c,vector<int>& seq){
-		for (int i=0;i<n-1;i++)seq.push_back(matrix[r][c-i]);
-		for (int i=0;i<n;i++)seq.push_back(matrix[r-i][c-(n-1)]);
+	void walk_bottomleft(vector<vector<int>>& matrix,int m,int n,int r,int c,vector<int>& seq){
+		for (int i=0;i<m-1;i++)seq.push_back(matrix[r][c-i]);
+		for (int i=0;i<n;i++)seq.push_back(matrix[r-i][c-(m-1)]);
 	}
 };
 
