@@ -5,12 +5,15 @@ public:
 		vector<vector<int>> group;
 		vector<string> flatgroup;
 		if (strs.size()==0)return flatgroup;
-
+		vector<unordered_map<char,int>> m(strs.size());
+		for(int i=0;i<strs.size();i++){
+			for(int j=0;j<strs[i].size();j++)++m[i][strs[i][j]];
+		}
 		group.push_back(vector<int>(1,0));
 		for (int i=1;i<strs.size();i++){
 			int j=0;
 			for (j=0;j<group.size();j++){
-				if (isAnagram(strs[i],strs[group[j][0]])){
+				if (strs[i].size()==strs[group[j][0]].size() && isAnagram(m[i],m[group[j][0]])){
 					group[j].push_back(i);
 					break;
 				}
@@ -27,11 +30,7 @@ public:
 		}
 		return flatgroup;
 	}
-	bool isAnagram(const string& lhs,const string& rhs){
-		if (lhs.size()!=rhs.size()) return false;
-		unordered_map<char,int> m1,m2;
-		for(int i=0;i<lhs.size();++i)++m1[lhs[i]];
-		for(int i=0;i<rhs.size();++i)++m2[rhs[i]];
+	bool isAnagram(unordered_map<char,int> m1,unordered_map<char,int> m2){
 		for(auto it=m1.begin();it!=m1.end();it++){
 			if (m2.count(it->first)==0||m2[it->first]!=it->second)return false;
 		}
