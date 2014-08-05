@@ -9,7 +9,7 @@ public:
 		bool flip=true;
 		int start=0;
 		int tr_r=0,tr_c=0,bl_r=M-1,bl_c=N-2;
-		for (int i=M;i>0;--i){
+		for (int i=M;i>0 && i+N-M>0;--i){
 			if(flip)
 				walk_topright(matrix,i,i+N-M,tr_r++,tr_c++,seq);
 			else
@@ -19,13 +19,13 @@ public:
 		return seq;
 	}
 	void walk_topright(vector<vector<int>>& matrix,int m,int n,int r,int c,vector<int>& seq){
-		for(int i=0;i<m-1;i++)seq.push_back(matrix[r][c+i]);
-		for(int i=0;i<n;i++)seq.push_back(matrix[r+i][c+m-1]);
+		for(int i=0;i<n;i++)seq.push_back(matrix[r][c+i]);
+		for(int i=1;i<m;i++)seq.push_back(matrix[r+i][c+n-1]);
 	}
 
 	void walk_bottomleft(vector<vector<int>>& matrix,int m,int n,int r,int c,vector<int>& seq){
-		for (int i=0;i<m-1;i++)seq.push_back(matrix[r][c-i]);
-		for (int i=0;i<n;i++)seq.push_back(matrix[r-i][c-(m-1)]);
+		for (int i=0;i<n;i++)seq.push_back(matrix[r][c-i]);
+		for (int i=1;i<m;i++)seq.push_back(matrix[r-i][c-(n-1)]);
 	}
 };
 
