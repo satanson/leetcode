@@ -30,7 +30,7 @@ public:
 		}
 		return flatgroup;
 	}
-	bool isAnagram(unordered_map<char,int> m1,unordered_map<char,int> m2){
+	bool isAnagram(unordered_map<char,int>&m1,unordered_map<char,int>& m2){
 		for(auto it=m1.begin();it!=m1.end();it++){
 			if (m2.count(it->first)==0||m2[it->first]!=it->second)return false;
 		}
