@@ -1,7 +1,7 @@
 #include<cppstdlib.hpp>
 class Solution {
 public:
-    char *strStr(char *haystack, char *needle) {
+	char *strStr(char *haystack, char *needle) {
 		if(!needle)return NULL;
 		if(strlen(needle)==1){
 			char *p=haystack;
@@ -11,7 +11,7 @@ public:
 		int M=strlen(haystack),N=strlen(needle);
 		vector<int> kmp_table(N);
 		create_kmp_table(&kmp_table[0],N,needle);
-		
+
 		int p=0,i=0;
 		while(p+i<M){
 			if(needle[i]==haystack[p+i]){
@@ -28,7 +28,7 @@ public:
 			}
 		}
 		return NULL;
-    }
+	}
 	void create_kmp_table(int kmp_table[],int n,char *needle){
 		kmp_table[0]=-1;
 		kmp_table[1]=0;
@@ -53,9 +53,7 @@ int main(){
 	string haystack,needle;
 	while(getline(cin,haystack)){
 		getline(cin,needle);
-		cout<<string(10,'#')<<endl;
 		char *p=(so.strStr((char*)haystack.c_str(),(char*)needle.c_str()));
-		cout<<string(p)<<endl;
-		cout<<string(10,'#')<<endl;
+		if(p)cout<<p<<endl;
 	}
 }
