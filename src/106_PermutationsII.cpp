@@ -13,25 +13,19 @@ public:
     }
 	list<list<int>> perm(unordered_map<int,int>& m){
 		list<list<int>> ps;
-		if(m.size()==1){
-			auto it=m.begin();
-			ps.push_back(list<int>(it->second,it->first));
-		}
+		bool allzero=true;
 		for (auto it=m.begin();it!=m.end();++it){
-			int k=it->first;
-			int v=it->second;
-			if(v>1){
+
+			if(it->second>0){
+				allzero=false;
 				--it->second;
-			}else{
-				m.erase(it);
+				list<list<int>> subps=perm(m);
+				for(auto it0=subps.begin();it0!=subps.end();++it0)it0->push_front(it->first);
+				ps.splice(ps.end(),subps);
+				++it->second;
 			}
-
-			list<list<int>> subps=perm(m);
-			for(auto it0=subps.begin();it0!=subps.end();++it0)it0->push_front(k);
-			ps.splice(ps.end(),subps);
-
-			m[k]=v;
 		}
+		if (allzero)return list<list<int>>(1,list<int>());
 		return ps;
 	}
 };
@@ -43,5 +37,6 @@ int main(){
 		vector<int> num=string2vector<int>(line);
 		vector<vector<int>> perms=so.permuteUnique(num);
 		for(int i=0;i<perms.size();i++)cout<<vector2string<int>(perms[i])<<endl;
+		cout<<string(10,'#')<<endl;
 	}
 }
